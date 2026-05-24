@@ -1,0 +1,811 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alex Bennett — Creative Copywriter Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ===============================
+         Warm, cinematic, minimal system
+         =============================== */
+
+      :root{
+        --cream: #f5f0e8;
+        --parchment: #ede5d4;
+        --latte: #c9a882;
+        --espresso: #3e2a1e;
+        --mocha: #6b4226;
+        --rust: #a0522d;
+        --fog: #b8a898;
+        --ink: #1e1510;
+
+        --bg: var(--cream);
+        --surface: rgba(237, 229, 212, .62);
+        --border: rgba(201, 168, 130, .35);
+
+        --radius-lg: 22px;
+        --radius-md: 16px;
+        --radius-sm: 12px;
+
+        --shadow: 0 24px 70px rgba(30, 21, 16, .14);
+        --shadow-soft: 0 18px 60px rgba(30, 21, 16, .10);
+
+        --serif: "Playfair Display", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+        --sans: "Lato", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+
+        --ease: cubic-bezier(.2,.8,.2,1);
+        --t: 260ms;
+
+        --container: 1120px;
+
+        --space-1: 6px;
+        --space-2: 10px;
+        --space-3: 14px;
+        --space-4: 18px;
+        --space-5: 24px;
+        --space-6: 32px;
+        --space-7: 44px;
+        --space-8: 60px;
+        --space-9: 84px;
+
+        color-scheme: light;
+      }
+
+      html{ scroll-behavior: smooth; }
+      *{ box-sizing:border-box; }
+      body{
+        margin:0;
+        background: var(--bg);
+        color: var(--espresso);
+        font-family: var(--sans);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+      }
+
+      img{ max-width:100%; display:block; }
+      a{ color: inherit; text-decoration: none; }
+
+      /* Focus */
+      :focus-visible{
+        outline: 3px solid color-mix(in srgb, var(--latte) 70%, transparent);
+        outline-offset: 3px;
+        border-radius: 10px;
+      }
+
+      .container{
+        width: min(var(--container), calc(100% - 2*var(--space-5)));
+        margin-inline:auto;
+      }
+
+      /* Typography */
+      .eyebrow{
+        font-size: 12px;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+        color: color-mix(in srgb, var(--rust) 60%, var(--fog));
+        font-weight: 700;
+      }
+      .h1{
+        font-family: var(--serif);
+        font-size: clamp(40px, 4.6vw, 64px);
+        letter-spacing: -1.4px;
+        margin: 0;
+        line-height: 1.02;
+      }
+      .h2{
+        font-family: var(--serif);
+        font-size: clamp(24px, 2.6vw, 36px);
+        letter-spacing: -.8px;
+        margin: 0;
+        line-height: 1.1;
+      }
+      .lead{
+        font-size: clamp(16px, 1.7vw, 20px);
+        color: color-mix(in srgb, var(--mocha) 70%, var(--fog));
+        max-width: 60ch;
+        margin: 0;
+      }
+      .muted{ color: color-mix(in srgb, var(--mocha) 56%, var(--fog)); }
+
+      /* Grain overlay */
+      .grain,
+      .grain::before{ position:relative; }
+      .grain::before{
+        content:'';
+        position:fixed;
+        inset:0;
+        pointer-events:none;
+        z-index: 1;
+        opacity:.18;
+        mix-blend-mode:multiply;
+        background-image:
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+        background-size: 240px 240px;
+      }
+      @media (prefers-reduced-motion: reduce){
+        *{ animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+      }
+
+      /* Nav */
+      .navWrap{
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      }
+      .nav{
+        border-bottom: 1px solid rgba(201,168,130,.28);
+        background: rgba(245,240,232,.55);
+        backdrop-filter: blur(14px);
+      }
+      .navInner{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        padding: 14px 0;
+      }
+      .brand{
+        display:flex;
+        align-items:center;
+        gap: 10px;
+        font-weight: 800;
+      }
+      .brandMark{
+        width: 12px;
+        height: 12px;
+        border-radius: 4px;
+        background: var(--latte);
+        box-shadow: 0 12px 30px rgba(201,168,130,.35);
+      }
+      .navLinks{
+        display:flex;
+        gap: 10px;
+        align-items:center;
+      }
+      .navLink{
+        padding: 10px 12px;
+        border-radius: 999px;
+        color: color-mix(in srgb, var(--espresso) 72%, var(--fog));
+        font-weight: 700;
+        font-size: 14px;
+        transition: background var(--t) var(--ease), border-color var(--t) var(--ease), transform var(--t) var(--ease);
+        border: 1px solid transparent;
+      }
+      .navLink:hover{
+        background: rgba(237,229,212,.6);
+        border-color: rgba(201,168,130,.36);
+        transform: translateY(-1px);
+      }
+      .navRight{
+        display:flex;
+        align-items:center;
+        gap: 10px;
+      }
+      .navBtn{
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(201,168,130,.35);
+        background: rgba(237,229,212,.45);
+        cursor:pointer;
+        font-weight: 800;
+        color: var(--espresso);
+      }
+
+      /* Mobile */
+      .hamburger{
+        display:none;
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
+        border: 1px solid rgba(201,168,130,.35);
+        background: rgba(237,229,212,.45);
+        cursor:pointer;
+      }
+      .hamburger span{
+        display:block;
+        width: 18px;
+        height: 2px;
+        margin: 5px auto;
+        background: var(--espresso);
+        border-radius: 999px;
+      }
+
+      .mobileMenu{ display:none; }
+
+      /* Buttons */
+      .btn{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        gap: 10px;
+        padding: 12px 16px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        font-weight: 800;
+        cursor:pointer;
+        transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease), background var(--t) var(--ease), border-color var(--t) var(--ease);
+        user-select:none;
+      }
+      .btn:hover{ transform: translateY(-1px); }
+      .btnPrimary{
+        background: var(--latte);
+        border-color: rgba(201,168,130,.45);
+        color: #1a140f;
+        box-shadow: 0 16px 50px rgba(201,168,130,.25);
+      }
+      .btnPrimary:hover{ box-shadow: 0 22px 70px rgba(201,168,130,.34); }
+      .btnGhost{
+        background: rgba(237,229,212,.55);
+        border-color: rgba(201,168,130,.35);
+        color: var(--espresso);
+      }
+      .btnGhost:hover{ background: rgba(237,229,212,.72); border-color: rgba(201,168,130,.55); }
+
+      /* Sections */
+      section{ padding: var(--space-8) 0; }
+
+      /* Hero */
+      .hero{
+        min-height: 100svh;
+        padding: 0;
+        position: relative;
+        display:flex;
+        align-items: center;
+        overflow:hidden;
+      }
+      .heroMedia{
+        position:absolute;
+        inset:0;
+        background-image:
+          url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=2400&auto=format&fit=crop&q=80');
+        background-size: cover;
+        background-position: center;
+        filter: saturate(.9) contrast(1.05) brightness(.98);
+        transform: scale(1.02);
+      }
+      .heroMedia::after{
+        content:'';
+        position:absolute;
+        inset:0;
+        background:
+          linear-gradient(90deg, rgba(245,240,232,.96) 0%, rgba(245,240,232,.84) 34%, rgba(245,240,232,.28) 70%, rgba(245,240,232,0) 100%),
+          linear-gradient(180deg, rgba(30,21,16,.26) 0%, rgba(30,21,16,.10) 45%, rgba(30,21,16,.30) 100%);
+      }
+      .heroMedia::before{
+        content:'';
+        position:absolute;
+        inset:0;
+        background:
+          radial-gradient(900px 360px at 20% 20%, rgba(201,168,130,.30), transparent 60%);
+        opacity:.55;
+      }
+
+      .heroInner{
+        position:relative;
+        z-index:2;
+      }
+      .heroGrid{
+        display:grid;
+        grid-template-columns: 1.15fr .85fr;
+        gap: var(--space-7);
+        align-items: center;
+      }
+      .heroText{ padding: 0; }
+      .heroActions{ margin-top: var(--space-4); display:flex; gap: 12px; flex-wrap:wrap; }
+      .heroCard{
+        background: rgba(237,229,212,.60);
+        border: 1px solid rgba(201,168,130,.32);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-soft);
+        padding: var(--space-5);
+        position: relative;
+        overflow:hidden;
+      }
+      .heroCard::before{
+        content:'';
+        position:absolute;
+        inset:-1px;
+        background:
+          radial-gradient(520px 200px at 30% 10%, rgba(201,168,130,.32), transparent 60%),
+          radial-gradient(420px 200px at 80% 60%, rgba(160,82,45,.16), transparent 70%);
+        opacity:.9;
+        pointer-events:none;
+      }
+      .heroCard > *{ position:relative; z-index:2; }
+      .heroCardTop{ display:flex; gap: 10px; flex-wrap:wrap; }
+      .pill{
+        font-size: 12px;
+        font-weight: 900;
+        padding: 8px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(201,168,130,.32);
+        background: rgba(245,240,232,.45);
+        color: color-mix(in srgb, var(--mocha) 70%, var(--fog));
+      }
+
+      .heroCardMock{
+        margin-top: var(--space-4);
+        height: 220px;
+        border-radius: 16px;
+        border: 1px dashed rgba(201,168,130,.55);
+        background:
+          linear-gradient(180deg, rgba(201,168,130,.28) 0%, rgba(245,240,232,0) 55%);
+      }
+
+      .fadeIn{ opacity:0; transform: translateY(10px); }
+      .reveal{ opacity:1; transform: translateY(0); transition: opacity 650ms var(--ease), transform 650ms var(--ease); }
+
+      /* Work */
+      .sectionHeading{ margin-bottom: var(--space-7); }
+      .workGrid{
+        display:grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--space-5);
+      }
+      .card{
+        background: rgba(237,229,212,.58);
+        border: 1px solid rgba(201,168,130,.30);
+        border-radius: var(--radius-lg);
+        padding: var(--space-5);
+        box-shadow: 0 18px 60px rgba(30,21,16,.06);
+        transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease), border-color var(--t) var(--ease);
+        position:relative;
+        overflow:hidden;
+      }
+      .card::after{
+        content:'';
+        position:absolute;
+        inset:-2px;
+        background:
+          radial-gradient(520px 240px at 10% 0%, rgba(201,168,130,.22), transparent 55%),
+          radial-gradient(520px 240px at 100% 100%, rgba(160,82,45,.10), transparent 55%);
+        opacity:.6;
+        pointer-events:none;
+      }
+      .card > *{ position:relative; z-index:2; }
+
+      .card:hover{
+        transform: translateY(-3px);
+        border-color: rgba(201,168,130,.55);
+        box-shadow: var(--shadow);
+      }
+      .cardTop{ display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px; }
+      .cardIndex{ font-weight: 900; color: color-mix(in srgb, var(--mocha) 62%, var(--fog)); }
+      .card h3{
+        font-family: var(--serif);
+        font-size: 22px;
+        letter-spacing: -.6px;
+        margin: 0 0 10px;
+      }
+      .card p{ margin: 0; color: color-mix(in srgb, var(--mocha) 62%, var(--fog)); }
+      .cardActions{ margin-top: var(--space-4); }
+
+      /* About/Contact */
+      .aboutGrid{
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-7);
+        align-items: stretch;
+      }
+
+      .aboutMedia{
+        position:relative;
+        border-radius: var(--radius-lg);
+        overflow:hidden;
+        border: 1px solid rgba(201,168,130,.30);
+        box-shadow: var(--shadow-soft);
+        min-height: 420px;
+        background-image:
+          url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=900&auto=format&fit=crop&q=80');
+        background-size: cover;
+        background-position: center;
+        filter: saturate(.88) contrast(1.04) brightness(.98);
+      }
+      .aboutMedia::after{
+        content:'';
+        position:absolute;
+        inset:0;
+        background:
+          linear-gradient(120deg, rgba(30,21,16,.25) 0%, rgba(30,21,16,.08) 45%, rgba(245,240,232,.05) 100%),
+          radial-gradient(520px 260px at 25% 20%, rgba(201,168,130,.30), transparent 60%);
+      }
+
+      .formCard{
+        background: rgba(237,229,212,.60);
+        border: 1px solid rgba(201,168,130,.30);
+        border-radius: var(--radius-lg);
+        padding: var(--space-5);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .contactForm{ margin-top: var(--space-4); }
+
+      .field{ display:block; margin-bottom: var(--space-3); }
+      .fieldLabel{
+        display:block;
+        font-weight: 900;
+        margin-bottom: 8px;
+        font-size: 13px;
+        letter-spacing: .02em;
+        color: color-mix(in srgb, var(--espresso) 76%, var(--mocha));
+      }
+      .fieldInput, .fieldTextarea{
+        width:100%;
+        border-radius: 14px;
+        border: 1px solid rgba(201,168,130,.36);
+        background: rgba(245,240,232,.55);
+        padding: 12px 14px;
+        font: inherit;
+        color: var(--espresso);
+        outline: none;
+        transition: border-color var(--t) var(--ease), box-shadow var(--t) var(--ease), background var(--t) var(--ease);
+      }
+      .fieldTextarea{ resize: vertical; }
+      .fieldInput:focus, .fieldTextarea:focus{
+        border-color: rgba(201,168,130,.75);
+        box-shadow: 0 0 0 4px rgba(201,168,130,.16);
+        background: rgba(245,240,232,.72);
+      }
+
+      .formActions{ margin-top: var(--space-4); display:flex; gap: 12px; align-items:center; }
+      .formHint{ margin: 12px 0 0; font-size: 14px; }
+
+      /* Footer */
+      footer{
+        padding: var(--space-8) 0;
+        border-top: 1px solid rgba(201,168,130,.25);
+        background: rgba(30,21,16,.03);
+      }
+      .footerGrid{
+        display:grid;
+        grid-template-columns: 1.2fr .8fr;
+        gap: var(--space-7);
+        align-items:flex-start;
+      }
+      .footerBrand{
+        display:flex; gap: 12px; align-items:center; margin-bottom: 10px;
+      }
+      .footerBrand strong{
+        font-family: var(--serif);
+        font-size: 20px;
+        letter-spacing: -.4px;
+      }
+      .footerCopy{ margin:0; color: color-mix(in srgb, var(--mocha) 52%, var(--fog)); }
+      .footerMeta{
+        display:flex;
+        flex-direction:column;
+        gap: 10px;
+        align-items:flex-start;
+      }
+      .footerLink{ font-weight: 900; color: color-mix(in srgb, var(--espresso) 80%, var(--mocha)); }
+      .footerLink span{ color: color-mix(in srgb, var(--mocha) 66%, var(--fog)); font-weight: 800; margin-left: 8px; }
+      .socialRow{ display:flex; gap: 12px; flex-wrap:wrap; margin-top: 10px; }
+
+      /* Responsive */
+      @media (max-width: 980px){
+        .heroGrid{ grid-template-columns: 1fr; }
+        .heroCard{ display:none; }
+        .workGrid{ grid-template-columns: 1fr; }
+        .aboutGrid{ grid-template-columns: 1fr; }
+        .aboutMedia{ min-height: 340px; }
+        .footerGrid{ grid-template-columns: 1fr; }
+      }
+
+      @media (max-width: 720px){
+        .navLinks{ display:none; }
+        .hamburger{ display:block; }
+        .mobileMenu{
+          display:none;
+          padding: 6px 0 14px;
+          border-top: 1px solid rgba(201,168,130,.25);
+        }
+        .mobileMenu.isOpen{ display:block; }
+        .mobileMenu a{
+          display:block;
+          padding: 12px 0;
+          font-weight: 900;
+          border-bottom: 1px solid rgba(201,168,130,.18);
+          color: color-mix(in srgb, var(--espresso) 78%, var(--mocha));
+        }
+        section{ padding: var(--space-7) 0; }
+      }
+    </style>
+  </head>
+
+  <body class="grain">
+    <div class="navWrap">
+      <header class="nav" aria-label="Site navigation">
+        <div class="container navInner">
+          <a class="brand" href="#top" aria-label="Alex Bennett home">
+            <span class="brandMark" aria-hidden="true"></span>
+            <span>Alex Bennett</span>
+          </a>
+
+          <nav class="navLinks" aria-label="Primary">
+            <a class="navLink" href="#work">Work</a>
+            <a class="navLink" href="#about-contact">About</a>
+            <a class="navLink" href="#about-contact">Contact</a>
+          </nav>
+
+          <div class="navRight">
+            <button class="navBtn" type="button" onclick="document.getElementById('contactFormName')?.focus()">
+              Let’s talk
+            </button>
+
+            <button class="hamburger" type="button" aria-label="Open menu" aria-expanded="false" id="hamburger">
+              <span></span><span></span><span></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="container mobileMenu" id="mobileMenu">
+          <a href="#work" onclick="closeMenu()">Work</a>
+          <a href="#about-contact" onclick="closeMenu()">About</a>
+          <a href="#about-contact" onclick="closeMenu()">Contact</a>
+        </div>
+      </header>
+    </div>
+
+    <main id="top">
+      <!-- =========================
+           HERO
+           ========================= -->
+      <section class="hero" aria-label="Hero">
+        <div class="heroMedia" aria-hidden="true"></div>
+
+
+        <div class="container heroInner">
+          <div class="heroGrid">
+            <div class="heroText">
+              <div class="eyebrow">Creative Copywriter</div>
+              <h1 class="h1">Hi, I’m Alex Bennett.</h1>
+              <p class="lead" style="margin-top:14px;">
+                Crafting clever copy that works harder than your morning coffee.
+              </p>
+
+              <div class="heroActions">
+                <a class="btn btnPrimary" href="#about-contact">Explore my services</a>
+                <a class="btn btnGhost" href="#work">View work</a>
+              </div>
+            </div>
+
+            <aside class="heroCard" aria-hidden="true">
+              <div class="heroCardTop">
+                <span class="pill">Editorial clarity</span>
+                <span class="pill">Brand voice</span>
+                <span class="pill">Conversion</span>
+              </div>
+              <div class="heroCardMock"></div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================
+           WORK
+           ========================= -->
+      <section id="work" aria-label="Work">
+        <div class="container">
+          <div class="sectionHeading">
+            <div class="eyebrow">Featured work</div>
+            <h2 class="h2">A few things I’m proud of</h2>
+            <p class="lead" style="margin-top:14px; max-width: 65ch;">
+              Proof that the pen really is mightier than the algorithm.
+            </p>
+          </div>
+
+          <div class="workGrid">
+            <article class="card reveal">
+              <div class="cardTop">
+                <span class="cardIndex">01</span>
+                <span class="pill">Revamp</span>
+              </div>
+              <h3>Revamped a SaaS website</h3>
+              <p>
+                Tightened messaging, rebuilt the conversion flow, and shipped a calmer editorial voice.
+              </p>
+              <div class="cardActions">
+                <a class="btn btnGhost" href="#work" onclick="toast('Project opened: Revamped a SaaS website')">View project</a>
+              </div>
+            </article>
+
+            <article class="card reveal">
+              <div class="cardTop">
+                <span class="cardIndex">02</span>
+                <span class="pill">Leadership</span>
+              </div>
+              <h3>Ghostwrote for a CEO</h3>
+              <p>
+                Strategic leadership narrative across essays, launch notes, and keynote-ready copy.
+              </p>
+              <div class="cardActions">
+                <a class="btn btnGhost" href="#work" onclick="toast('Project opened: Ghostwrote for a CEO')">View project</a>
+              </div>
+            </article>
+
+            <article class="card reveal">
+              <div class="cardTop">
+                <span class="cardIndex">03</span>
+                <span class="pill">Systems</span>
+              </div>
+              <h3>Developed brand voice guides</h3>
+              <p>
+                A practical voice system: tone, do/don’t examples, and onboarding-ready templates.
+              </p>
+              <div class="cardActions">
+                <a class="btn btnGhost" href="#work" onclick="toast('Project opened: Developed brand voice guides')">View project</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================
+           ABOUT / CONTACT
+           ========================= -->
+      <section id="about-contact" aria-label="About and contact">
+        <div class="container aboutGrid">
+          <div class="aboutMedia" aria-hidden="true"></div>
+
+          <div class="formCard">
+            <div class="eyebrow">About / Contact</div>
+            <h2 class="h2">Let’s create something worth reading</h2>
+
+            <form class="contactForm" id="contactForm" autocomplete="on">
+              <label class="field">
+                <span class="fieldLabel">Name</span>
+                <input class="fieldInput" id="contactFormName" type="text" name="name" required />
+              </label>
+
+              <label class="field">
+                <span class="fieldLabel">Email</span>
+                <input class="fieldInput" type="email" name="email" required />
+              </label>
+
+              <label class="field">
+                <span class="fieldLabel">Message</span>
+                <textarea class="fieldInput fieldTextarea" name="message" rows="5" required></textarea>
+              </label>
+
+              <div class="formActions">
+                <button class="btn btnPrimary" type="submit">Send</button>
+              </div>
+
+              <p class="formHint muted" id="formHint">I’ll reply within 1–2 business days.</p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer aria-label="Footer">
+      <div class="container footerGrid">
+        <div>
+          <div class="footerBrand">
+            <span class="brandMark" aria-hidden="true"></span>
+            <strong>Alex Bennett</strong>
+          </div>
+          <p class="footerCopy">
+            Warm editorial copy, cinematic restraint — built to make readers lean in.
+          </p>
+        </div>
+
+        <div class="footerMeta">
+          <div class="footerLink">
+            Email <span><a href="mailto:hello@reallygreatsite.com">hello@reallygreatsite.com</a></span>
+          </div>
+          <div class="footerLink">
+            Phone <span><a href="tel:123-456-7890">123-456-7890</a></span>
+          </div>
+
+          <div class="socialRow" aria-label="Social links">
+            <a class="btn btnGhost" href="#" onclick="toast('Social link clicked (placeholder)')">Instagram</a>
+            <a class="btn btnGhost" href="#" onclick="toast('Social link clicked (placeholder)')">Behance</a>
+            <a class="btn btnGhost" href="#" onclick="toast('Social link clicked (placeholder)')">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobileMenu');
+
+      function openMenu(){
+        if(!mobileMenu) return;
+        mobileMenu.classList.add('isOpen');
+        if(hamburger) hamburger.setAttribute('aria-expanded', 'true');
+      }
+      function closeMenu(){
+        if(!mobileMenu) return;
+        mobileMenu.classList.remove('isOpen');
+        if(hamburger) hamburger.setAttribute('aria-expanded', 'false');
+      }
+
+      hamburger?.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.contains('isOpen');
+        if(isOpen) closeMenu(); else openMenu();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape') closeMenu();
+      });
+
+      // Reveal on scroll (IntersectionObserver)
+      const revealEls = Array.from(document.querySelectorAll('.reveal'));
+      const io = new IntersectionObserver(
+        (entries) => {
+          for(const ent of entries){
+            if(ent.isIntersecting){
+              ent.target.classList.add('reveal');
+              io.unobserve(ent.target);
+            }
+          }
+        },
+        { threshold: 0.15 }
+      );
+      revealEls.forEach(el => io.observe(el));
+
+      // Hero Ken-Burns (simple on load)
+      window.addEventListener('load', () => {
+        const media = document.querySelector('.heroMedia');
+        if(!media) return;
+        media.animate(
+          [
+            { transform: 'scale(1.05)' },
+            { transform: 'scale(1.12)' }
+          ],
+          { duration: 2600, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards' }
+        );
+      });
+
+      // Contact form feedback
+      const form = document.getElementById('contactForm');
+      const hint = document.getElementById('formHint');
+
+      form?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if(hint){
+          hint.textContent = 'Message sent. Thanks — I’ll get back to you soon.';
+        }
+        form.reset();
+        toast('Thanks! Your message has been queued (demo).');
+      });
+
+      // Tiny toast
+      let toastTimer;
+      function toast(msg){
+        let el = document.getElementById('toast');
+        if(!el){
+          el = document.createElement('div');
+          el.id = 'toast';
+          el.style.cssText = `
+            position:fixed; left:50%; bottom:22px; transform:translateX(-50%);
+            background: rgba(30,21,16,.92); color: #f5f0e8; padding: 12px 16px;
+            border-radius: 999px; font-weight: 900; letter-spacing: .01em;
+            box-shadow: 0 18px 70px rgba(0,0,0,.26); z-index: 9999;
+            max-width: calc(100% - 28px); text-align:center;
+          `;
+          document.body.appendChild(el);
+        }
+        el.textContent = msg;
+        el.style.opacity = '1';
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          el.style.opacity = '0';
+        }, 2400);
+      }
+    </script>
+  </body>
+</html>
+
